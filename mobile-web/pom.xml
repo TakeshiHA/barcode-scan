@@ -64,7 +64,7 @@
                             </excludes>
                         </filter>
                     </filters>
-                    <finalName>${project.artifactId}-${project.version}-${maven.build.timestamp}</finalName>
+                    <finalName>${project.artifactId}</finalName>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar mobile-web/target/mobile-web-1.1.0-SNAPSHOT.jar com.mobile.MobileApp
+web: java -jar mobile-web/target/mobile-web.jar server mobile-web/mobile-web.yml
