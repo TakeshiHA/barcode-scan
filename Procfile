@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$PORT mobile-web.jar server mobile-web/mobile-web.yml
+worker: java -jar mobile-web.jar server mobile-web/mobile-web.yml
