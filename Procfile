@@ -1,1 +1,1 @@
-web: java -jar mobile-web.jar server mobile-web/mobile-web.yml
+web: java $JAVA_OPTS -Ddw.server.connector.port=$PORT -jar mobile-web.jar server mobile-web/mobile-web.yml
