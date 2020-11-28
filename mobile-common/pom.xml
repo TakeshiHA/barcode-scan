@@ -10,16 +10,20 @@
     <packaging>jar</packaging>
     <name>Mobile: Common Service</name>
     <dependencies>
-         <dependency>
+        <dependency>
             <groupId>com.smoketurner</groupId>
             <artifactId>dropwizard-swagger</artifactId>
             <version>2.0.0-1</version>
-             <exclusions>
-                 <exclusion>
-                     <groupId>javax.validation</groupId>
-                     <artifactId>validation-api</artifactId>
-                 </exclusion>
-             </exclusions>
-         </dependency>  
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>  
     </dependencies>    
 </project>
