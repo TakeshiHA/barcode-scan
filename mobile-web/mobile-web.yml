@@ -1,0 +1,61 @@
+## YAML Template.
+---
+mongodb:
+    host: mobile-back.zxiup.mongodb.net
+    port: 27017
+server: 
+    maxThreads: 120000
+    maxQueuedRequests: 120000
+    type: simple
+    applicationContextPath: /mobile
+    connector:
+        type: http
+        port: 8080
+        idleTimeout: 60 seconds
+    requestLog:
+      #timeZone: UTC
+      appenders:
+        - type: file
+          currentLogFilename: /var/log/mobile-web-access.log
+          threshold: ALL
+          archive: true
+          archivedLogFilenamePattern: /var/log/mobile-web-access.log-%d.log
+          archivedFileCount: 5
+httpClient:
+    timeout: 7500ms
+    connectionTimeout: 7500ms
+    connectionRequestTimeout: 7500ms
+    minThreads: 1
+    maxThreads: 128
+    gzipEnabled: false
+    gzipEnabledForRequests: false
+logging:
+  level: INFO
+  loggers:
+    io.dropwizard: INFO
+    org.glassfish.jersey.filter.LoggingFilter: INFO
+  appenders:
+    - type: console
+      threshold: ALL
+      #timeZone: UTC
+      target: stdout
+    - type: file
+      currentLogFilename: /var/log/mobile-web.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: /var/log/mobile-web-%d.log
+      archivedFileCount: 5
+      #timeZone: UTC
+jwtCookieAuth:
+  secretSeed: Opv2sT0G85g1u5EEmuRniXRRc1kepur24xfSDGKwSTx0kcrdEjlb82zDW0lOjvDaABFyyBGA1opO7MNKMIyIsVdiczZnxLdp8x5F
+  secure: false
+  httpOnly: true
+  domain: null
+  sameSite: null
+  sessionExpiryVolatile: PT30m
+  sessionExpiryPersistent: P7d
+swagger:
+  resourcePackage: com.mobile,com.mobile.api,com.mobile.resources
+  version: "2.0.0"
+  title: Mobile Api Documentation
+  description: "Swagger"
