@@ -7,10 +7,14 @@ package com.mobile.client.api;
 
 import com.mobile.common.api.ResourceBase;
 import com.mobile.common.core.Barcode;
+import com.mobile.common.exception.GoAmbuAppException;
+import com.mobile.common.exception.GoAmbuException;
+import com.mobile.common.exception.GoAmbuExceptionEnum;
 import com.mongodb.DuplicateKeyException;
 import com.mongodb.MongoClient;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import javax.ws.rs.core.Response;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.VerboseJSR303ConstraintViolationException;
@@ -24,6 +28,7 @@ import org.slf4j.LoggerFactory;
 public class MobileResource extends ResourceBase {
 
     final static Logger LOGGER = LoggerFactory.getLogger(MobileResource.class);
+
     public MobileResource(MongoClient mongoClient) {
         super(mongoClient);
     }
@@ -34,17 +39,22 @@ public class MobileResource extends ResourceBase {
         barcodes.stream().forEach(bar -> {
             bar.setId(new ObjectId().toHexString());
             bar.setSaveDate(new Date().getTime());
-            saveBarcodes(bar);
+            try {
+                saveBarcodes(bar);
+            } catch (GoAmbuException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+                throw new GoAmbuAppException(ex);
+            }
         });
 
         return Response.ok(barcodes).build();
     }
-    
-    protected void saveBarcodes(Barcode bar){
+
+    protected void saveBarcodes(Barcode bar) throws GoAmbuException {
         try {
             ds.save(bar);
         } catch (DuplicateKeyException | VerboseJSR303ConstraintViolationException e) {
-            LOGGER.error(e.getMessage(), e);
+            throw new GoAmbuException(GoAmbuExceptionEnum.EXC003, e);
         }
     }
 

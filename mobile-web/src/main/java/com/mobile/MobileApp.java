@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mobile.api.MobileService;
 import com.mobile.client.api.MobileResource;
 import com.mobile.common.CorsFilter;
+import com.mobile.common.GoAmbuExceptionHandler;
 import com.mongodb.MongoClient;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
@@ -50,6 +51,7 @@ public class MobileApp extends Application<MobileAppConfig> {
         
         environment.jersey().register(new MobileService(cr));
         
+        environment.jersey().register(new GoAmbuExceptionHandler());
         environment.jersey().register(new CorsFilter());
 
         environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
