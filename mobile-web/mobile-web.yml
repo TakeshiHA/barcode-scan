@@ -10,7 +10,8 @@ server:
     applicationContextPath: /mobile
     connector:
         type: http
-        port: 8080
+        port: 
+            number: 8080
         idleTimeout: 60 seconds
     requestLog:
       #timeZone: UTC
@@ -29,23 +30,6 @@ httpClient:
     maxThreads: 128
     gzipEnabled: false
     gzipEnabledForRequests: false
-logging:
-  level: INFO
-  loggers:
-    io.dropwizard: INFO
-    org.glassfish.jersey.filter.LoggingFilter: INFO
-  appenders:
-    - type: console
-      threshold: ALL
-      #timeZone: UTC
-      target: stdout
-    - type: file
-      currentLogFilename: /var/log/mobile-web.log
-      threshold: ALL
-      archive: true
-      archivedLogFilenamePattern: /var/log/mobile-web-%d.log
-      archivedFileCount: 5
-      #timeZone: UTC
 jwtCookieAuth:
   secretSeed: Opv2sT0G85g1u5EEmuRniXRRc1kepur24xfSDGKwSTx0kcrdEjlb82zDW0lOjvDaABFyyBGA1opO7MNKMIyIsVdiczZnxLdp8x5F
   secure: false
